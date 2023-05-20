@@ -1,0 +1,39 @@
+{
+  "name": "node-web-vscode-sample",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "node-web-vscode-sample",
+  "workspaceFolder": "/node-web-vscode-sample",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // 改行コードを設定
+        "files.eol": "\n",
+        // 保存時にフォーマット
+        "editor.formatOnSave": true,
+        // フォーマッターをprettierに設定
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        // prettier設定
+        "prettier.printWidth": 200,
+        // jsonはVSCodeのフォーマッターを利用
+        "[jsonc]": {
+          "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        // typescriptのSDKを現在ディレクトリのに指定
+        "typescript.tsdk": "node_modules/typescript/lib"
+      },
+      "extensions": [
+        // VSCode日本語化
+        "MS-CEINTL.vscode-language-pack-ja",
+        // フォーマッター
+        "esbenp.prettier-vscode",
+        // git 以下3つ
+        "mhutchie.git-graph",
+        "donjayamanne.githistory",
+        "eamodio.gitlens",
+        // vue 以下2つ
+        "Vue.volar",
+        "Vue.vscode-typescript-vue-plugin"
+      ]
+    }
+  }
+}
