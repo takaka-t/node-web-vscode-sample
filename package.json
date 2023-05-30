@@ -1,0 +1,23 @@
+{
+  "name": "web-vscode-sample",
+  "version": "1.0.0",
+  "description": "Node.jsのWebアプリをVSCodeで開発する際のベストプラクティスを模索する",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/takaka-t/node-web-vscode-sample.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/takaka-t/node-web-vscode-sample/issues"
+  },
+  "homepage": "https://github.com/takaka-t/node-web-vscode-sample#readme",
+  "devDependencies": {
+    "typescript": "~5.0.4"
+  }
+}
