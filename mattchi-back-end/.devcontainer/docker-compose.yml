@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  node-ts-express:
+    container_name: "node-ts-express"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../:/node-ts-express:cached
+    tty: true

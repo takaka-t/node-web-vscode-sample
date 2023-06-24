@@ -1,0 +1,41 @@
+{
+  "name": "node-ts-express",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "node-ts-express",
+  "workspaceFolder": "/node-ts-express",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // 括弧記号色付け機能
+        "editor.bracketPairColorization.enabled": true,
+        // 改行コードを設定
+        "files.eol": "\n",
+        // 保存時にフォーマット
+        "editor.formatOnSave": true,
+        // フォーマッターをprettierに設定
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        // prettier設定
+        "prettier.printWidth": 200,
+        // jsonはVSCodeのデフォルトフォーマッターを利用
+        "[jsonc]": {
+          "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        // typescriptのSDKを現在ディレクトリのに指定
+        "typescript.tsdk": "node_modules/typescript/lib"
+      },
+      "extensions": [
+        // git 以下3つ
+        //ギットグラフが表示される
+        "mhutchie.git-graph",
+        //gitの更新履歴を確認したり、git操作をサポートすることができる
+        "donjayamanne.githistory",
+        //「コミット単位でのファイル比較」や「最新のコミット内容とそのコミッター表示」
+        "eamodio.gitlens",
+        // VSCode日本語化
+        "MS-CEINTL.vscode-language-pack-ja",
+        // フォーマッター
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}

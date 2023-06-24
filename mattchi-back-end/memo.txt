@@ -1,0 +1,155 @@
+
+バックエンド開発メモ(Express)
+Docker を使用
+実行環境 node
+フレームワーク Express
+
+Node + express + TypeScript 開発参考資料
+https://zenn.dev/ichigoooo/scraps/dd632de444f448
+https://gist.github.com/mitsuruog/fc48397a8e80f051a145
+
+アプリディレクトリ構成
+→ テンプレートエンジンを使用する？あるにはあるが、js で生成される(express-generator)
+ts で生成されるものもあるがいらないファイルまで生成されて微妙(yeoman)
+→ 自身でディレクトリの構成を考えた方がよさそう
+→ なので、もろもろの設定ファイルは、自身で作成
+
+ディレクトリ構成案
+src
+|__constant   定数ファイル
+|
+|__helper   ヘルパーファイル
+|
+|__models   モデルファイル
+|
+|__controller　コントローラーファイル
+|  |
+|  |__userController.ts 　コントローラー
+|  | 
+|  |__router.ts　ルーターファイル
+|
+|__server.ts   メインファイル
+
+ディレクトリ構成参考資料
+https://qiita.com/MotohiroSiobara/items/b672b22ce0505e5e17de
+
+環境構築
+
+環境構築資料(結構のってる)
+https://www.webdesignleaves.com/pr/jquery/typescript-development-environment.html
+・package.json 作成
+npm init
+
+・typeScript インストール
+npm install typescript --save-dev
+
+・Express のインストール
+npm install express
+npm install @types/express --save-dev
+
+・ホットリロード
+・コンパイル(トランスパイル)
+基本 node で typeScript を動かすとき、js ファイルに変換した後に実行する必要がある
+
+tsconfig.json
+→ トランスパイルの設定ファイル
+全てのファイルをコンパイルするとか、
+
+ファイルオプション参考資料
+https://qiita.com/crml1206/items/8fbfbecc0b40968bfc42
+https://www.wakuwakubank.com/posts/498-typescript-compiler/
+
+通常のコンパイル方法
+ex)
+ts ファイルをトランスパイル
+npx tsc index.js
+※npm：node_modules にインストールされたコマンド（実行ファイル）を実行するためのツール
+
+js ファイル実行
+node index.js
+
+watch オプションを使用することで、ts ファイルが更新されるたびに自動的に再コンパイルしてくれる
+
+開発の際にいちいちコンパイルするのは、めんどいのでホットリロードを使用
+
+・ホットリロードは、２つやり方がある
+・ts-node-dev
+ts ファイルを js ファイルにコンパイルすることなく、起動することができ、
+さらに監視モードで素早く再起動が使用できる
+
+ts-node-dev インストール
+npm install ts-node-dev --save-dev
+
+package.json への設定
+ts-node-dev --respawn <監視するファイル>
+上記を scripts に記載
+
+https://qiita.com/sa9ra4ma/items/67ab5ac6fea3e5f065b0
+
+※Docker 内でやる時は、「--poll」オプションを追加する必要あり
+https://qiita.com/manten120/items/3e1723d78c9c0d158262
+
+・ts-node と nodemon
+ts-node：ts ファイルを js ファイルにコンパイルすることなく、起動することができる
+npm install ts-node --save-dev
+
+nodemon：
+npm install nodemon --save-dev
+
+各種ファイル(package.json,tsconfig.json,nodemon.json)設定
+https://chaika.hatenablog.com/entry/2020/09/29/083000
+
+ts-node-dev の方が設定することが少なそうだしこっちでやってみる
+
+・vscode デバック有効
+・launch.json 生成
+vscode デバックボタンを押すと「launch.json を作成します」というリンクがでるのでクリック
+そうすると launch.json が生成される
+
+・launch.json ファイル設定
+runtimeExecutable 属性では、ランタイム環境を指定できる
+ts-node-dev をランタイム環境に指定したい場合
+ex)${workspaceFolder}/node_modules/.bin/ts-node-dev
+
+https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_launch-configuration-support-for-npm-and-other-tools
+
+ランタイム環境の引数を設定できる
+ex)"runtimeArgs": [
+"--respawn",
+"--poll"
+],
+
+program 属性には、実行するファイルを指定
+
+launch.json のオプション
+https://amateur-engineer-blog.com/vscode-launchjson/
+
+・ts-node をデバックに使用する方法
+https://qiita.com/murasuke/items/9ce3eeeee949324f32b7
+
+・検証ツール
+swagger とか postman とか色々
+
+
+基礎知識
+基本公式をみればなんとかなる
+https://expressjs.com/
+
+・メソッドについて
+req, res, next
+
+res.query
+クエリパラメータの値が入ってくる
+値を何も指定しなかったら「undefined」でくる
+
+req.body
+リクエストボディの値が入ってくる
+
+https://qiita.com/syumiwohossu/items/f9ee317f31adc3ad387b
+
+・セキュリティ
+helmet 実装
+
+・ヘルパー
+nullかどうか
+undefinedかどうか
