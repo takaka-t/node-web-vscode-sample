@@ -41,11 +41,11 @@ https://www.webdesignleaves.com/pr/jquery/typescript-development-environment.htm
 npm init
 
 ・typeScript インストール
-npm install typescript --save-dev
+npm install -D typescript
 
 ・Express のインストール
-npm install express
-npm install @types/express --save-dev
+npm install -D express
+npm install -D @types/express --save-dev
 
 ・ホットリロード
 ・コンパイル(トランスパイル)
@@ -78,7 +78,7 @@ ts ファイルを js ファイルにコンパイルすることなく、起動�
 さらに監視モードで素早く再起動が使用できる
 
 ts-node-dev インストール
-npm install ts-node-dev --save-dev
+npm install -D ts-node-dev
 
 package.json への設定
 ts-node-dev --respawn <監視するファイル>
@@ -91,10 +91,10 @@ https://qiita.com/manten120/items/3e1723d78c9c0d158262
 
 ・ts-node と nodemon
 ts-node：ts ファイルを js ファイルにコンパイルすることなく、起動することができる
-npm install ts-node --save-dev
+npm install -D ts-node
 
 nodemon：
-npm install nodemon --save-dev
+npm install -D nodemon
 
 各種ファイル(package.json,tsconfig.json,nodemon.json)設定
 https://chaika.hatenablog.com/entry/2020/09/29/083000
@@ -119,6 +119,8 @@ ex)"runtimeArgs": [
 "--poll"
 ],
 
+※MacOSでは、上記の引数を渡さなくても更新される Windowsでは、ないと更新されない
+
 program 属性には、実行するファイルを指定
 
 launch.json のオプション
@@ -126,6 +128,9 @@ https://amateur-engineer-blog.com/vscode-launchjson/
 
 ・ts-node をデバックに使用する方法
 https://qiita.com/murasuke/items/9ce3eeeee949324f32b7
+
+・プロセスが死なないときのコマンド
+kill -9 $(lsof -t -i:8080)
 
 ・検証ツール
 swagger とか postman とか色々
@@ -150,6 +155,60 @@ https://qiita.com/syumiwohossu/items/f9ee317f31adc3ad387b
 ・セキュリティ
 helmet 実装
 
+helmetとは
+CSP(bontents security policy)の設定ができ、HTTP ヘッダーを監視、管理、制御
+
+helmetインストール
+npm i helmet
+
+型定義インストール
+npm i -D @types/helmet
+
+X-Powered-Byを非表示に
+サーバーが何かをわからないようにする
+helmetを使用すれば、デフォルトで設定される
+
+CSP設定項目
+公式に詳しく書いてある
+https://helmetjs.github.io/
+Content-Security-policy(XSS攻撃の軽減やデータインジェクション攻撃の軽減をするために追加できるセキュリティレイヤ)
+
+cspチェッカー
+https://csp-evaluator.withgoogle.com/
+
+
+Cross-Origin-Opener-Policy: ページのプロセスを分離するのに役立ちます
+Cross-Origin-Resource-Policy: 他のユーザーがあなたのリソースをクロスオリジンでロードすることをブロックします
+Origin-Agent-Cluster: プロセス分離をオリジンベースに変更します
+Referrer-Policy:Refererヘッダーを制御します
+Strict-Transport-Security: ブラウザに HTTPS を優先するよう指示します。
+X-Content-Type-Options: MIME スニッフィングを回避します
+X-DNS-Prefetch-Control: DNS プリフェッチを制御します
+X-Download-Options: ダウンロードを強制的に保存します (Internet Explorer のみ)
+X-Frame-Options:クリックジャッキング攻撃を軽減するレガシーヘッダー
+X-Permitted-Cross-Domain-Policies: Acrobat などの Adob​​e 製品のクロスドメイン動作を制御します
+X-Powered-By: Web サーバーに関する情報。単純な攻撃に使用される可能性があるため削除されました
+X-XSS-Protection: XSS 攻撃を軽減しようとするレガシーヘッダーですが、事態を悪化させるため、ヘルメットで無効にします
+
+
+・CORS対策
+corsインストール
+npm install cors
+
+型定義インストール
+npm i -D @types/cors
+
+オプション設定
+https://www.npmjs.com/package/cors
+
+プリフライトリクエスト
+
+CORSについて
+この記事味とけばある程度理解できる
+https://zenn.dev/riko/articles/cors_deepen_understanding
+
 ・ヘルパー
 nullかどうか
 undefinedかどうか
+
+・envファイルを使えるように
