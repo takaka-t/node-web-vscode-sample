@@ -130,7 +130,7 @@ https://amateur-engineer-blog.com/vscode-launchjson/
 https://qiita.com/murasuke/items/9ce3eeeee949324f32b7
 
 ・プロセスが死なないときのコマンド
-kill -9 $(lsof -t -i:8080)
+kill -9 $(lsof -t -i:3000)
 
 ・検証ツール
 swagger とか postman とか色々
@@ -152,11 +152,10 @@ req.body
 
 https://qiita.com/syumiwohossu/items/f9ee317f31adc3ad387b
 
-・セキュリティ
-helmet 実装
-
+・helmet設定
 helmetとは
-CSP(bontents security policy)の設定ができ、HTTP ヘッダーを監視、管理、制御
+httpヘッダの設定ができる
+主にXSSやスクリプトインジェクションから守るために
 
 helmetインストール
 npm i helmet
@@ -164,32 +163,49 @@ npm i helmet
 型定義インストール
 npm i -D @types/helmet
 
-X-Powered-Byを非表示に
-サーバーが何かをわからないようにする
-helmetを使用すれば、デフォルトで設定される
+基本のデフォルト設定でヘッダーは保護されそうだが、CSPとかオリジン関係は設定する必要あるかも(フロントとの兼ね合いから)
+CSP
+CSPデフォルト値(selfは、同一オリジン)
+設定したオリジンだけ許可する
+https://zenn.dev/tatsuyasusukida/articles/express-content-security-policy
 
-CSP設定項目
-公式に詳しく書いてある
-https://helmetjs.github.io/
-Content-Security-policy(XSS攻撃の軽減やデータインジェクション攻撃の軽減をするために追加できるセキュリティレイヤ)
+クロスオリジン系
+COEP
+ドキュメントに明示的に許可を与えていないクロスオリジンのリソースを、ドキュメントが読み込むことを防ぐ
+オプション
+Cross-Origin-Embedder-Policy: unsafe-none
+デフォルト値　CORSプロトコルやCross-Origin-Resource-Policyヘッダーで明示的に許可しなくても、クロスオリジンのリソースを取得することができる
+Cross-Origin-Embedder-Policy: require-corp
+クロスオリジンからは、CORS or CORP なしのリソースは読み込めないようにする。
+↓
+require-corp を使用して COEP を有効にし、クロスオリジンのリソースを読み込む必要がある場合は、CORS をサポートする必要があり、
+COEP によるブロックを回避するために、リソースを別のオリジンから読み込み可能であると明示的にマークする必要がある
 
-cspチェッカー
-https://csp-evaluator.withgoogle.com/
+COOP
+window.opener へのアクセス制限を掛ける
+デフォルト値：same-orizin
 
+CORP
+cross-origin なページから、読み込まれないようにする
+対象リソース：画像, CSS, JSなど
+デフォルト値：same-orizin
 
-Cross-Origin-Opener-Policy: ページのプロセスを分離するのに役立ちます
-Cross-Origin-Resource-Policy: 他のユーザーがあなたのリソースをクロスオリジンでロードすることをブロックします
-Origin-Agent-Cluster: プロセス分離をオリジンベースに変更します
-Referrer-Policy:Refererヘッダーを制御します
-Strict-Transport-Security: ブラウザに HTTPS を優先するよう指示します。
-X-Content-Type-Options: MIME スニッフィングを回避します
-X-DNS-Prefetch-Control: DNS プリフェッチを制御します
-X-Download-Options: ダウンロードを強制的に保存します (Internet Explorer のみ)
-X-Frame-Options:クリックジャッキング攻撃を軽減するレガシーヘッダー
-X-Permitted-Cross-Domain-Policies: Acrobat などの Adob​​e 製品のクロスドメイン動作を制御します
-X-Powered-By: Web サーバーに関する情報。単純な攻撃に使用される可能性があるため削除されました
-X-XSS-Protection: XSS 攻撃を軽減しようとするレガシーヘッダーですが、事態を悪化させるため、ヘルメットで無効にします
+CORS
+cross-origin なページから、読み込まれないようにする
+対象リソース：XHRによってアクセスされるページ
+CORSライブラリで設定
 
+オリジン系の説明
+https://zenn.dev/toukairin/articles/b4bfc6ee35056f
+https://laboradian.com/coep-coop-corp-cors/
+
+helmetで設定されるヘッダーについて　オプションとか
+https://www.npmjs.com/package/helmet
+
+参考資料
+https://zenn.dev/s1r_j/articles/6a8e2d593bfc08e21392
+https://levelup.gitconnected.com/mastering-typescript-securing-rest-apis-in-express-js-with-api-keys-9ea5a1e799f7
+https://stackoverflow.com/questions/60706823/what-modules-of-helmet-should-i-use-in-my-rest-api
 
 ・CORS対策
 corsインストール
@@ -207,8 +223,37 @@ CORSについて
 この記事味とけばある程度理解できる
 https://zenn.dev/riko/articles/cors_deepen_understanding
 
+・Cookie セッション・モジュール
+1.express-session
+セッション識別子(sessionID)のみを Cookie 内のクライアントに保存し、セッション データをサーバー (通常はデータベース) に保存
+
+2.cookie-session
+セッション キーだけではなく、セッション全体を Cookie に保存
+
+セッション認証であれば1でいいかな
+
 ・ヘルパー
 nullかどうか
 undefinedかどうか
 
-・envファイルを使えるように
+・環境変数を管理する
+envファイルを使えるように
+npm install dotenv
+
+本番とデバックで切り替えれるようにしたい
+
+参考にできそうな資料
+https://auth0.com/blog/node-js-and-typescript-tutorial-build-a-crud-api/
+
+・共通エラーハンドリング
+参考になりそう
+https://qiita.com/nyandora/items/cd4f12eb62295c10269c
+
+・検証ツール
+swagger
+postman
+どれ使用する？
+
+・DB接続ドライバ
+DBは何を使用する？
+それによって接続ドライバライブラリインストール
