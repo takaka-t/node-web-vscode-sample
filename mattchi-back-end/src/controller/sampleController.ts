@@ -3,6 +3,7 @@ import { TypeHelper } from "../helper/typeHelper";
 
 const router = express.Router();
 
+
 router.get("/", async (req: express.Request, res: express.Response): Promise<void> => {
   const numberList = [1, 2, 3, 4, 5];
 

@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            //タスク名
+            "label": "task kill",
+            //タスクのタイプ
+            "type": "shell",
+            //実行コマンド
+            "command": "kill -9 $(lsof -t -i:3000)",
+            "group": {
+                //デフォルトで実行される
+                "isDefault": true
+            },
+            "presentation": {
+                //閉じるには任意のキーを押してくださいを省略
+                "showReuseMessage": false,
+                // Terminalパネルは開かないように
+                "reveal": "silent",
+                // 実行されたタスク名表示しない 
+                "echo": false
+            },
+        }
+    ]
+}

@@ -119,7 +119,7 @@ ex)"runtimeArgs": [
 "--poll"
 ],
 
-※MacOSでは、上記の引数を渡さなくても更新される Windowsでは、ないと更新されない
+※MacOSは上記の引数を渡さなくても更新されるが、Windowsは引数がないとうまく動かない
 
 program 属性には、実行するファイルを指定
 
@@ -131,6 +131,11 @@ https://qiita.com/murasuke/items/9ce3eeeee949324f32b7
 
 ・プロセスが死なないときのコマンド
 kill -9 $(lsof -t -i:3000)
+
+・vsCodeデバッグ終了後、タスクが残ってしまう問題
+task.jsonにexpressのタスクをキルしてくれるコマンドを書き、デバッグ終了時自動で実行してくれるように
+launch.jsonにpostDebugTaskオプションを追加
+lsofコマンドを使用してタスクをキルするため、lsofライブラリをインストールした
 
 ・検証ツール
 swagger とか postman とか色々
@@ -239,6 +244,10 @@ undefinedかどうか
 ・環境変数を管理する
 envファイルを使えるように
 npm install dotenv
+
+dotenv.config({ path: .envファイルのパス })
+process.env.ファイルで作成した変数
+ex)process.env.PORT
 
 本番とデバックで切り替えれるようにしたい
 
