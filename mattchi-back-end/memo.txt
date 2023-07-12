@@ -24,8 +24,14 @@ src
 |
 |__controller　コントローラーファイル
 |  |
-|  |__userController.ts 　コントローラー
-|  | 
+|  |__sampleController  コントローラーごとにファイルをきる
+|  |                 |
+|  |                 |__GetUserController.ts 　    GETコントローラー
+|  |                 | 
+|  |                 |__CreateUserController.ts    POSTコントローラー
+|  |                 |
+|  |                 |__DeleteUserController.ts    Deleteコントローラー
+|  |             
 |  |__router.ts　ルーターファイル
 |
 |__server.ts   メインファイル
@@ -235,12 +241,6 @@ https://zenn.dev/riko/articles/cors_deepen_understanding
 2.cookie-session
 セッション キーだけではなく、セッション全体を Cookie に保存
 
-セッション認証であれば1でいいかな
-
-・ヘルパー
-nullかどうか
-undefinedかどうか
-
 ・環境変数を管理する
 envファイルを使えるように
 npm install dotenv
@@ -260,9 +260,24 @@ https://qiita.com/nyandora/items/cd4f12eb62295c10269c
 
 ・検証ツール
 swagger
-postman
-どれ使用する？
+swagger-jsdoc - ソースコメント等でAPIを書くためのライブラリ
+Swagger-UI - APIドキュメントを表示するWebビューアー
+
 
 ・DB接続ドライバ
 DBは何を使用する？
 それによって接続ドライバライブラリインストール
+
+
+ーーーーーーとどーーーーーー
+・swagger実装
+・helmet要素まとめる
+・CORS対策もう一度さらってまとめる
+・セキュリティさらう
+・実装
+作成していくが必要そうなものがあれば適宜追加していく
+→セキュリティ周りとか
+・共通エラーハンドリング
+・env本番と開発で切り替えれるように
+・session実装
+sessionを使用する時に調べる感じで
