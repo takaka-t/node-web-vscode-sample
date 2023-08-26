@@ -5,6 +5,7 @@ Node.js の Web アプリを VSCode で開発する際のベストプラクテ�
 # この階層を node プロジェクト化した理由
 
 VSCode で typescript のバージョンを指定するため
+各プロジェクトの typescrip バージョンは一致させること
 
 # デバッグ方法
 
