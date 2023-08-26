@@ -1,6 +1,7 @@
 # debian
-FROM node:18.13.0-slim
+FROM node:20.5.1-slim
 
+# apt
 RUN apt update
 
 # git

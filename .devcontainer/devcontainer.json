@@ -1,8 +1,8 @@
 {
-  "name": "node-web-vscode-sample",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "node-web-vscode-sample",
-  "workspaceFolder": "/node-web-vscode-sample",
+  "name": "${localWorkspaceFolderBasename}",
+  "dockerComposeFile": "./docker/docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
   "customizations": {
     "vscode": {
       "settings": {
