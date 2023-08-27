@@ -19,7 +19,26 @@
           "editor.defaultFormatter": "vscode.json-language-features"
         },
         // typescriptのSDKを現在ディレクトリのに指定
-        "typescript.tsdk": "node_modules/typescript/lib"
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "launch": {
+          "version": "0.2.0",
+          "configurations": [
+            {
+              "type": "node",
+              "request": "launch",
+              "name": "back-end デバッグ",
+              "skipFiles": [
+                "<node_internals>/**"
+              ],
+              "runtimeExecutable": "${workspaceFolder}/back-end/node_modules/.bin/ts-node-dev", // ts-node-devの場所
+              // "runtimeArgs": [],
+              // "program": "${file}"
+              "program": "${workspaceFolder}/back-end/src/server.ts" // 開始ファイル 
+              // "args": []
+            }
+          ],
+          "compounds": []
+        }
       },
       "extensions": [
         // VSCode日本語化
