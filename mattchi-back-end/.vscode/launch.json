@@ -13,6 +13,10 @@
             ],
             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node-dev",
             "program": "${workspaceFolder}/src/index.ts",
+            //デバックが終了した時にタスクを自動でキルしてくれるコマンド
+            //task.jsonにコマンド記載
+            "postDebugTask": "task kill",
+            //windows環境の場合引数を入れてあげなければいけない
             // "runtimeArgs": [
             //     "--respawn",
             //     "--poll",
